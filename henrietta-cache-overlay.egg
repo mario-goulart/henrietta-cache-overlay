@@ -1,0 +1,9 @@
+;; -*- scheme -*-
+((synopsis
+  "Create a directory layout out of henrietta's cache, so that it can be used by chicken-install")
+ (author "Mario Domenech Goulart")
+ (category tools)
+ (license "BSD")
+ (components
+  (program henrietta-cache-overlay
+           (csc-options "-O3" "-d1"))))

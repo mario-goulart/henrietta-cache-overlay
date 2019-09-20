@@ -1,0 +1,7 @@
+;; -*- scheme -*-
+(compile -O3 -d1 henrietta-cache-overlay.scm)
+
+(install-program
+ 'henrietta-cache-overlay
+ '("henrietta-cache-overlay")
+ '((version "0.0.1")))
