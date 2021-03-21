@@ -56,13 +56,16 @@
            (fprintf (current-error-port)
                     "WARNING: no version directory in ~a"
                     egg-cache-dir)
-           (let ((latest-version
-                  (car (sort egg-versions version>=?)))
-                 (egg-overlay-dir (make-pathname overlay-dir cache-dirname)))
+           (let* ((latest-version
+                   (car (sort egg-versions version>=?)))
+                  (egg-overlay-dir (make-pathname overlay-dir cache-dirname))
+                  (latest-version-dir
+                   (make-pathname egg-cache-dir latest-version)))
              (create-directory egg-overlay-dir 'recursive)
-             (create/replace-symbolic-link
-              (make-pathname egg-cache-dir latest-version)
-              egg-overlay-dir)))))
+             (create/replace-symbolic-link latest-version-dir egg-overlay-dir)
+             (with-output-to-file (make-pathname latest-version-dir "VERSION")
+               (lambda ()
+                 (write latest-version)))))))
    (directory cache-dir)))
 
 (define (usage exit-code)
